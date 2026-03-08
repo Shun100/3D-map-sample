@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Cesium Tokyo Token-Free Safe</title>
+<script src="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Cesium.js"></script>
+<link href="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+<style>
+html, body, #cesiumContainer {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+</style>
+</head>
+<body>
+<div id="cesiumContainer"></div>
+<script>
+const viewer = new Cesium.Viewer("cesiumContainer", {
+    imageryProvider: new Cesium.OpenStreetMapImageryProvider({
+        url: "https://a.tile.openstreetmap.org/"
+    }),
+    baseLayerPicker: false,
+    terrainProvider: new Cesium.EllipsoidTerrainProvider(), // 地形は楕円体
+    geocoder: false,
+    timeline: false,
+    animation: false
+});
+
+// カメラを東京に設定
+viewer.camera.setView({
+    destination: Cesium.Cartesian3.fromDegrees(
+        139.7671,
+        35.6812,
+        5000
+    )
+});
+
+// 赤いマーカー
+viewer.entities.add({
+    position: Cesium.Cartesian3.fromDegrees(139.7671, 35.6812, 0),
+    point: { pixelSize: 10, color: Cesium.Color.RED }
+});
+</script>
+</body>
+</html>

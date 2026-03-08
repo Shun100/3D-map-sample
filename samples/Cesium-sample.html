@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cesium Tokyo Map</title>
+
+<script src="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Cesium.js"></script>
+<link href="https://cesium.com/downloads/cesiumjs/releases/1.111/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+
+<style>
+html, body, #cesiumContainer {
+  width:100%;
+  height:100%;
+  margin:0;
+  padding:0;
+}
+</style>
+</head>
+
+<body>
+<div id="cesiumContainer"></div>
+
+<script>
+
+// Cesium ion トークン
+Cesium.Ion.defaultAccessToken = "YOUR_ACCESS_TOKEN";
+
+// Viewer
+const viewer = new Cesium.Viewer("cesiumContainer", {
+  terrain: Cesium.Terrain.fromWorldTerrain()
+});
+
+// 東京駅あたり
+const tokyo = Cesium.Cartesian3.fromDegrees(
+  139.7671,  // 経度
+  35.6812,   // 緯度
+  15000      // 高度
+);
+
+// 初期カメラ位置
+viewer.camera.setView({
+  destination: tokyo
+});
+
+</script>
+
+</body>
+</html>
